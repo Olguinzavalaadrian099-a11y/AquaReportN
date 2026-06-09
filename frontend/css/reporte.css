@@ -320,20 +320,38 @@ input:required:valid {
 
 .modal-overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(7, 27, 52, 0.4); 
+    backdrop-filter: blur(10px);             
+    -webkit-backdrop-filter: blur(10px);
+    display: none;                           
     justify-content: center;
     align-items: center;
     z-index: 9999;
 }
 
-.container {
+.loader {
     position: relative; 
     border-radius: 50%;
     height: 96px; width: 96px;
     animation: rotate_3922 1.2s linear infinite;
     background-color: #9b59b6;
     background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
+}
+
+.loader-box {
+    background: rgba(7, 27, 52, 0.8);        /* Fondo del cuadro */
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(111, 197, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }

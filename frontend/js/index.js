@@ -119,10 +119,17 @@ function buscarReporte() {
 window.onload = function() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
+    console.log("ID capturado en URL:", id); 
+    
     if (id) {
         const mensajeDiv = document.getElementById('mensaje-id');
         const textoId = document.getElementById('texto-id');
-        if (mensajeDiv) mensajeDiv.style.display = 'block';
-        if (textoId) textoId.innerText = 'Tu ID de seguimiento es: #' + id;
+        
+        if (mensajeDiv) {
+            mensajeDiv.style.display = 'block';
+        }
+        if (textoId) {
+            textoId.innerText = 'Tu ID de seguimiento es: #' + id;
+        }
     }
 };

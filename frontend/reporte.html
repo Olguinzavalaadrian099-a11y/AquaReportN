@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportar Fuga - AquaReport</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/reporte.css">
+    <style>
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <img src="img/logo.png" alt="Logo" class="logo">
+            <div class="nav-right">
+                <a href="aquareport.html" class="button">Volver al Inicio</a>
+                <button class="menu-btn" id="menuBtn">☰</button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="mailto:olguinzavalaadrian099@gmail.com">Contactanos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-report">
+        <div class="title-report">Reporta</div>
+        <div id="mensaje-id"
+            style="display: none; background: rgba(7, 27, 52, 0.8); backdrop-filter: blur(10px); border: 1px solid #6fc5ff; padding: 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <h2 style="font-size: 1.5rem; margin-bottom: 15px; color: #6fc5ff;">¡Reporte enviado exitosamente!</h2>
+            <p id="texto-id" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
+            <button onclick="cerrarYVolver()"
+                style="background: linear-gradient(-45deg, #63A4FF 0%, #83EAF1 100%); border: none; padding: 12px 30px; border-radius: 50px; color: white; font-weight: bold; cursor: pointer; transition: 0.3s;">
+                Cerrar y volver al inicio
+            </button>
+        </div>
+        <form action="procesar_reporte.php" method="POST" enctype="multipart/form-data">
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Nombre completo</span>
+                    <input type="text" name="nombre_completo" placeholder="Escribe tu nombre completo" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Edad</span>
+                    <input type="number" name="edad" placeholder="Escribe tu edad" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Fecha del reporte</span>
+                    <input type="date" name="fecha_reporte" placeholder="Fecha de reporte" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Foto del reporte</span>
+                    <label for="foto-reporte" class="file-upload-btn">
+                        <span>Seleccionar foto</span>
+                    </label>
+                    <input type="file" name="foto_reporte" id="foto-reporte" accept="image/*" capture="environment"
+                        required style="display: none;">
+                </div>
+                <div class="input-box">
+                    <span class="details">Numero de telefono</span>
+                    <input type="number" name="telefono" placeholder="Numero de telefono" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Documento de pago predial</span>
+                    <label for="file-predial" class="file-upload-btn">
+                        <span>Seleccionar PDF</span>
+                    </label>
+                    <input type="file" name="archivo_predial" id="file-predial" accept=".pdf" required
+                        style="display: none;">
+                </div>
+                <div class="input-box">
+                    <span class="details">Correo</span>
+                    <input type="email" name="email" placeholder="Escribe tu correo" required>
+                    <div class="textarea-box">
+                        <span class="details">Referencias</span>
+                        <textarea id="ubicacion" name="referencias"
+                            placeholder="Describe entre qué calles se encuentra la fuga..." required></textarea>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <span class="details">Ubicación exacta de la fuga</span>
+                    <div id="map" style="height: 300px; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                    </div>
+                    <input type="hidden" id="lat" name="latitud" required>
+                    <input type="hidden" id="lng" name="longitud" required>
+                </div>
+                <div class="button-report">
+                    <input type="submit" value="Enviar reporte">
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

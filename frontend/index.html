@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+    <title>AquaReport</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <img src="img/logo.png" alt="" class="logo">
+            </button>
+            <button class="menu-btn" id="menuBtn">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="reporte.html">Reportar Fuga</a></li>
+                <li><a href="#" onclick="abrirModal()">Seguimiento</a></li>
+                <li><a href="reportes.php">Reportes</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="modal-consulta" class="modal-fade"
+        style="position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(7, 27, 52, 0.85); backdrop-filter:blur(15px); transition: 0.3s;">
+        <div
+            style="background: linear-gradient(180deg, #0a2542 0%, #071b34 100%); margin: 8% auto; padding: 40px; width: 90%; max-width: 450px; border-radius: 30px; border: 1px solid rgba(111, 197, 255, 0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(111, 197, 255, 0.1); color: white; text-align: center; position: relative;">
+            <span onclick="cerrarModal()"
+                style="position:absolute; right:25px; top:20px; cursor:pointer; font-size:28px; color:#6fc5ff;">&times;</span>
+            <div style="margin-bottom: 5px;">
+                <img src="img/logo.png" alt="AquaReport Logo"
+                    style="max-width: 100%; width: 300px; height: auto; display: block; margin: 0 auto;">
+            </div>
+            <h2 style="color:#6fc5ff; margin-bottom:10px; font-size: 1.8rem;">Seguimiento</h2>
+            <p style="color: rgba(255,255,255,0.7); margin-bottom: 25px;">Ingresa tus datos para verificar el estado de
+                tu reporte.</p>
+            <input type="text" id="id-busqueda" placeholder="ID del reporte"
+                style="width:100%; padding:15px; margin-bottom:15px; border-radius:15px; border: 1px solid rgba(111, 197, 255, 0.3); background: rgba(255,255,255,0.05); color:white; outline:none; transition: 0.3s;">
+            <input type="text" id="nombre-busqueda" placeholder="Tu nombre registrado"
+                style="width:100%; padding:15px; margin-bottom:25px; border-radius:15px; border: 1px solid rgba(111, 197, 255, 0.3); background: rgba(255,255,255,0.05); color:white; outline:none; transition: 0.3s;">
+            <button onclick="buscarReporte()"
+                style="width:100%; padding:15px; border-radius:15px; background: linear-gradient(45deg, #63A4FF, #83EAF1); border:none; color:#071b34; font-weight:bold; font-size: 1rem; cursor:pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(99, 164, 255, 0.3);">
+                Consultar Estado
+            </button>
+            <div id="resultado-busqueda"
+                style="margin-top:25px; padding: 15px; border-radius: 15px; background: rgba(0,0,0,0.2);">
+            </div>
+        </div>
+    </div>
+    <div class="hero-container">
+        <img src="img/fondo.png" alt="Fondo" class="fondo">
+        <div class="hero-text">
+            <div class="text-content">
+                <h1>¡<span class="azulOne">Bienvenido </span>a<br>
+                    nuestro portal <br>
+                    Aqua<span class="azulTwo">Report</span>!</h1>
+                <p>¿Detectaste una fuga de agua y <br>
+                    quieres reportarla?</p>
+                <p class="eslogan">Reportala en nuestro portal <br>
+                    facil y sencillo</p>
+                <a href="reporte.html" class="button">Reportar Aqui</a>
+            </div>
+        </div>
+    </div>
+    <section class="info-banner">
+        <div class="info-circle">
+            <img src="img/favicon.png" alt="">
+        </div>
+        <div class="info-content">
+            <span class="info-label">AquaReport</span>
+            <h3>Tu reporte <span class="azulThree">ayuda</span> a cuidar el <span class="azulFive">agua</span></h3>
+            <p>
+                Consulta el estado de tus reportes, recibe seguimiento y
+                contribuye a mejorar tu comunidad de forma rápida y sencilla.
+            </p>
+            <div class="stats-actions">
+                <button class="action-btn">
+                    <i class="icon-clock"></i> <span>Reporta</span>
+                </button>
+                <button class="action-btn">
+                    <i class="icon-alert"></i>
+                    <span>Ayuda</span>
+                </button>
+                <button class="action-btn">
+                    <i class="icon-map"></i>
+                    <span>Cuida</span>
+                </button>
+            </div>
+        </div>
+        <div class="flip-card glass-premium">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <div class="tip-icon-container">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="title azulFive">Estadísticas Aqua</h3>
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-header">
+                                <p class="stats-label">Desperdicio México</p>
+                                <span class="stat-percent">40%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 40%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-header">
+                                <p class="stats-label">Desperdicio Edo. Méx</p>
+                                <span class="stat-percent">35%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 35%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-header">
+                                <p class="stats-label">Fugas no reportadas</p>
+                                <span class="stat-percent">50%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 50%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="subtitle">Guía de Consumo Responsable</p>
+                    <div class="status-indicator"></div>
+                </div>
+                <div class="flip-card-back">
+                    <h3 class="title gradient-text">Sabías que...</h3>
+                    <div class="tip-data-box">
+                        <p>Cerrar la llave mientras te cepillas los dientes ahorra</p>
+                        <div class="highlight-data">
+                            <span class="value">10</span>
+                            <span class="unit">LITROS</span>
+                        </div>
+                        <p>de agua <b>por minuto</b>.</p>
+                    </div>
+                    <div class="tip-footer-slogan">Cuida el recurso, cuida tu futuro.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="carousel-intro" id="pasosReporte">
+        <h5>¿Cómo funciona AquaReport?</h5>
+        <p>Sigue estos sencillos pasos para realizar tu reporte y ayudarnos a gestionar <br>
+            mejor el cuidado del agua en nuestra comunidad.</p>
+        <div class="button-container">
+            <button class="buttonOne" onclick="abrirModal()">
+                <span>Ver Seguimiento</span>
+            </button>
+        </div>
+    </div>
+    <div class="cards-container">
+        <div class="card-wrapper swiper">
+            <ul class="card-list swiper-wrapper">
+                <li class="card-item swiper-slide">
+                    <a href="#" class="card-link">
+                        <div class="card-image-wrapper">
+                            <img src="img/description1.png" alt="" class="card-image">
+                        </div>
+                        <p class="badge">Visita</p>
+                        <h2 class="card-title">Visita nuestro sitio web y registrate</h2>
+                        <button class="card-button material-symbols-rounded">arrow_forward</button>
+                    </a>
+                </li>
+                <li class="card-item swiper-slide">
+                    <a href="#" class="card-link">
+                        <div class="card-image-wrapper">
+                            <img src="img/description2.png" alt="" class="card-image">
+                        </div>
+                        <p class="badge">Registrate</p>
+                        <h2 class="card-title">Sube tus documentos y tus datos</h2>
+                        <button class="card-button material-symbols-rounded">arrow_forward</button>
+                    </a>
+                </li>
+                <li class="card-item swiper-slide">
+                    <a href="#" class="card-link">
+                        <div class="card-image-wrapper">
+                            <img src="img/description3.png" alt="" class="card-image">
+                        </div>
+                        <p class="badge">Reporta</p>
+                        <h2 class="card-title">Manda la ubicacion y la evidencia</h2>
+                        <button class="card-button material-symbols-rounded">arrow_forward</button>
+                    </a>
+                </li>
+                <li class="card-item swiper-slide">
+                    <a href="#" class="card-link">
+                        <div class="card-image-wrapper">
+                            <img src="img/description4.png" alt="" class="card-image">
+                        </div>
+                        <p class="badge">Seguimiento</p>
+                        <h2 class="card-title">Da seguimiento de como va tu reporte</h2>
+                        <button class="card-button material-symbols-rounded">arrow_forward</button>
+                    </a>
+                </li>
+                <li class="card-item swiper-slide">
+                    <a href="#" class="card-link">
+                        <div class="card-image-wrapper">
+                            <img src="img/description5.png" alt="" class="card-image">
+                        </div>
+                        <p class="badge">Estado</p>
+                        <h2 class="card-title">Se completo tu reporte o aun no</h2>
+                        <button class="card-button material-symbols-rounded">arrow_forward</button>
+                    </a>
+                </li>
+            </ul>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+    <div class="footer-wrapper">
+        <div class="carousel-intro" id="pasosReporte"></div>
+        <div class="cards-container"></div>
+        <footer class="main-footer" style="padding: 20px; text-align: center;">
+            <p style="font-size: 0.85rem; margin-bottom: 10px; color: #6fc5ff;">
+                Al utilizar este portal, aceptas nuestro 
+                <a href="#" style="color: white; text-decoration: underline;">Aviso de Privacidad</a>.
+            </p>
+            <a href="login.php" class="button" style="display: inline-block; padding: 10px 20px; margin-bottom: 15px; border-radius: 50px; text-decoration: none; font-size: 0.9rem;">
+                Acceso para Empresas
+            </a>
+            <p>&copy; 2026 AquaReport. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

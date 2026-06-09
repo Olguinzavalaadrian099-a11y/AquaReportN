@@ -6,7 +6,7 @@
 
 body {
     background-color: #071b34; 
-    background-image: url('img/footer.png');
+    background-image: url('../img/footer.png');
     background-attachment: fixed;
     background-size: cover;
     margin: 0;

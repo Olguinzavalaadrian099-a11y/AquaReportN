@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    const loader = document.getElementById('loader-modal');
+
+    if (form && loader) {
+        form.addEventListener('submit', function() {
+            loader.style.display = 'flex';
+        });
+    }
+    
     const menuBtn = document.getElementById("menuBtn");
     const navLinks = document.getElementById("navLinks");
 

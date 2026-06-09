@@ -250,10 +250,10 @@
 <body>
     <nav>
         <div class="nav-container">
-            <img src="img/logo.png" alt="Logo" class="logo">
+            <img src="../frontend/img/logo.png" alt="Logo" class="logo">
             <button class="menu-btn" id="menuBtn">☰</button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Volver al inicio</a></li>
+                <li><a href="../frontend/index.html">Volver al inicio</a></li>
                 <li><a href="mailto:olguinzavalaadrian099@gmail.com">Contactanos</a></li>
             </ul>
         </div>

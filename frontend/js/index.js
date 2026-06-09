@@ -110,7 +110,7 @@ function buscarReporte() {
         if(resultadoDiv) resultadoDiv.innerHTML = "Por favor completa ambos campos.";
         return;
     }
-    fetch('consultar_ajax.php?id=' + encodeURIComponent(id) + '&nombre=' + encodeURIComponent(nombre))
+    fetch('/backend/consultar_ajax.php?id=' + encodeURIComponent(id) + '&nombre=' + encodeURIComponent(nombre))
         .then(response => response.text())
         .then(data => { if(resultadoDiv) resultadoDiv.innerHTML = data; })
         .catch(error => { if(resultadoDiv) resultadoDiv.innerHTML = "Error de conexión."; });

@@ -82,7 +82,7 @@ if (typeof Swiper !== 'undefined') {
 });
 
 function cerrarYVolver() {
-    window.location.href = 'aquareport.html'; 
+    window.location.href = '/index.html'; 
 }
 
 function abrirModal() {

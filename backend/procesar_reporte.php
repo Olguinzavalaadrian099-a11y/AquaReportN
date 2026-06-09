@@ -1,5 +1,5 @@
 <?php
-include 'conexion.php';
+include __DIR__ . '/conexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fecha = $_POST['fecha_reporte'];

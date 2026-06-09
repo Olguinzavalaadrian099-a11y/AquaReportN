@@ -259,83 +259,23 @@ input:required:valid {
     }
 }
 
-/* From Uiverse.io by terenceodonoghue */ 
-.loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  height: 96px;
-  width: 96px;
-  animation: rotate_3922 1.2s linear infinite;
-  background-color: #9b59b6;
-  background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
-}
-
-.loader span {
-  position: absolute;
-  border-radius: 50%;
-  height: 100%;
-  width: 100%;
-  background-color: #9b59b6;
-  background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
-}
-
-.loader span:nth-of-type(1) {
-  filter: blur(5px);
-}
-
-.loader span:nth-of-type(2) {
-  filter: blur(10px);
-}
-
-.loader span:nth-of-type(3) {
-  filter: blur(25px);
-}
-
-.loader span:nth-of-type(4) {
-  filter: blur(50px);
-}
-
-.loader::after {
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  background-color: #fff;
-  border: solid 5px #ffffff;
-  border-radius: 50%;
-}
-
-@keyframes rotate_3922 {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(7, 27, 52, 0.4); 
-    backdrop-filter: blur(10px);             
+    background-color: rgba(7, 27, 52, 0.4);
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    display: none;                           
+    display: none; 
     justify-content: center;
     align-items: center;
     z-index: 9999;
 }
 
 .loader-box {
-    background: rgba(7, 27, 52, 0.8);  
+    background: rgba(7, 27, 52, 0.8);
     padding: 40px;
     border-radius: 24px;
     border: 1px solid rgba(111, 197, 255, 0.2);
@@ -346,4 +286,42 @@ input:required:valid {
     gap: 20px;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.loader {
+    position: relative; 
+    border-radius: 50%;
+    height: 96px;
+    width: 96px;
+    animation: rotate_3922 1.2s linear infinite;
+    background-color: #9b59b6;
+    background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
+}
+
+.loader span {
+    position: absolute;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    background-color: #9b59b6;
+    background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
+}
+
+.loader span:nth-of-type(1) { filter: blur(5px); }
+.loader span:nth-of-type(2) { filter: blur(10px); }
+.loader span:nth-of-type(3) { filter: blur(25px); }
+.loader span:nth-of-type(4) { filter: blur(50px); }
+
+.loader::after {
+    content: "";
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    background-color: #fff;
+    border: solid 5px #ffffff;
+    border-radius: 50%;
+}
+
+@keyframes rotate_3922 {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }

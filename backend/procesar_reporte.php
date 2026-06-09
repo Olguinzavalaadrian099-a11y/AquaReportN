@@ -13,8 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $referencias = trim($_POST['referencias']);
     $lat = floatval($_POST['latitud']);
     $lng = floatval($_POST['longitud']); 
-    $ruta_foto = '../uploads/' . time() . '_' . basename($_FILES['foto_reporte']['name']);
-    $ruta_pdf = '../uploads/' . time() . '_' . basename($_FILES['archivo_predial']['name']);
+    $ruta_carpeta = '/var/www/html/uploads/'; 
+    $ruta_foto = $ruta_carpeta . time() . '_' . basename($_FILES['foto_reporte']['name']);
+    $ruta_pdf = $ruta_carpeta . time() . '_' . basename($_FILES['archivo_predial']['name']);
 
     if (move_uploaded_file($_FILES['foto_reporte']['tmp_name'], $ruta_foto) && 
         move_uploaded_file($_FILES['archivo_predial']['tmp_name'], $ruta_pdf)) {

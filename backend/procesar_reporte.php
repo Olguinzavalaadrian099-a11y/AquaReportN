@@ -26,8 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt = $conexion->prepare($sql);
             $stmt->execute([$nombre, $edad, $fecha, $telefono, $email, $referencias, $lat, $lng, $ruta_foto, $ruta_pdf]);
             $nuevo_id = $conexion->lastInsertId();
-            
-            header("Location: reporte.html?id=" . $nuevo_id);
+            header("Location: /frontend/reporte.html?id=" . $nuevo_id);
             exit(); 
         } catch (PDOException $e) {
             echo "Error en la base de datos: " . $e->getMessage();

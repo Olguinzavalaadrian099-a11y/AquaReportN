@@ -3,11 +3,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const loader = document.getElementById('loader-modal');
 
     if (form && loader) {
-        form.addEventListener('submit', function() {
+        form.addEventListener('submit', function(e) {
+            console.log("¡Evento submit detectado! Mostrando loader...");
             loader.style.display = 'flex';
         });
+    } else {
+        console.error("Error: No se encontró el formulario o el modal-loader en el HTML.");
     }
-    
+
     const menuBtn = document.getElementById("menuBtn");
     const navLinks = document.getElementById("navLinks");
 

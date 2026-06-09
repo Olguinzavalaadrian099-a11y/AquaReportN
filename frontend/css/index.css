@@ -753,7 +753,7 @@ nav {
     margin-bottom: 20px;
     width: 100%;
     padding: 25px 20px;
-    background-image: url('img/footer.png');
+    background-image: url('../img/footer.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

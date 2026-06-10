@@ -118,7 +118,6 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         .report-card {
             width: 100%;
-            max-width: 900px;
             margin: 0 auto 30px auto;
             background: rgba(10, 25, 45, 0.70); 
             border: 1px solid rgba(255, 255, 255, 0.12);
@@ -170,6 +169,8 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         .select-estado {
+            width: 160px;
+            padding: 10px;
             appearance: none;
             -webkit-appearance: none;
             padding: 12px 30px;
@@ -322,9 +323,9 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             margin: 20px 0;
         }
 
-        #mapModal { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; 
+        @media (max-width: 600px) {
+            .report-card { grid-template-columns: 1fr; text-align: center; }
+            .map-box { width: 100%; }
         }
 
     </style>
@@ -391,14 +392,6 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             const text = document.getElementById('loader-message');
             text.innerText = mensaje;
             modal.style.display = show ? 'flex' : 'none';
-        }
-
-        function abrirModal(lat, lon) {
-            document.getElementById('mapModal').style.display = 'flex';
-            if (window.modalMap) { window.modalMap.remove(); }
-            window.modalMap = L.map('modal-map').setView([lat, lon], 16);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '' }).addTo(window.modalMap);
-            L.marker([lat, lon]).addTo(window.modalMap);
         }
 
         function actualizarEstado(id, nuevoEstado) {

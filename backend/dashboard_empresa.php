@@ -131,7 +131,8 @@ $reportes = $stmt->fetchAll();
         }
 
         .select-estado { 
-            padding: 8px 20px; 
+            width: 150px;
+            padding: 8px 10px; 
             border-radius: 100px; 
             border: none; 
             background: linear-gradient(-45deg, #63A4FF 0%, #83EAF1 100%); color: #ffffff; 
@@ -275,21 +276,10 @@ $reportes = $stmt->fetchAll();
             margin: 20px 0;
         }
 
-        #mapModal {
-            display: none; 
-            position: fixed; 
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 99999; 
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-        }
-
-        #mapModal > div {
-            width: 100% !important;
-            height: 80% !important; 
-            position: relative;
+        @media (max-width: 600px) {
+            .report-card { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+            .map-box { width: 100%; height: 150px; }
+            .nav-container { flex-direction: column; gap: 15px; }
         }
 
     </style>
@@ -370,20 +360,6 @@ $reportes = $stmt->fetchAll();
                 alert("Error de conexión");
                 document.getElementById('loader-modal').style.display = 'none';
             });
-        }
-        let modalMap;
-        function abrirModal(lat, lon) {
-            const modal = document.getElementById('mapModal');
-            modal.style.display = 'flex';
-            if (modalMap) { modalMap.remove(); }
-            modalMap = L.map('modal-map').setView([lat, lon], 16);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: ''
-            }).addTo(modalMap);
-            L.marker([lat, lon]).addTo(modalMap);
-        }
-        function cerrarModal() {
-            document.getElementById('mapModal').style.display = 'none';
         }
     </script>
 </body>

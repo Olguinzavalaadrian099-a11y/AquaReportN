@@ -153,6 +153,7 @@ $reportes = $stmt->fetchAll();
             background-clip: text; 
             -webkit-text-fill-color: transparent; 
         }
+        
         .container-loader {
             display: flex;
             align-items: center;

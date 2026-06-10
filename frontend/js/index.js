@@ -7,6 +7,35 @@ window.addEventListener('pageshow', function (event) {
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
     const loader = document.getElementById('loader-modal');
+    const linksConLoader = document.querySelectorAll('.link-loader');
+    linksConLoader.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = this.getAttribute('href');
+            const loader = document.getElementById('loader-modal');
+            
+            if (loader) {
+                loader.style.display = 'flex';
+            }
+            
+            setTimeout(() => {
+                window.location.href = url;
+            }, 1500);
+        });
+    });
+
+    const btnAccesoEmpresa = document.querySelector('a[href="/backend/login.php"]');
+    if (btnAccesoEmpresa) {
+        btnAccesoEmpresa.addEventListener('click', (e) => {
+            e.preventDefault();
+            const loader = document.getElementById('loader-modal');
+            if (loader) loader.style.display = 'flex';
+            
+            setTimeout(() => {
+                window.location.href = "/backend/login.php";
+            }, 1500);
+        });
+    }
 
     if (form && loader) {
             form.addEventListener('submit', function(e) {
@@ -165,22 +194,4 @@ window.onload = function() {
         }
     }
 };
-function activarLoaderNavegacion(event) {
-    const loader = document.getElementById('loader-modal');
-    
-    event.preventDefault();
-    const url = event.currentTarget.getAttribute('href');
 
-    if (loader) {
-        loader.style.display = 'flex';
-    }
-    setTimeout(() => {
-        window.location.href = url;
-    }, 1500);
-}
-const btnAccesoEmpresa = document.querySelector('a[href="/backend/login.php"]');
-if (btnAccesoEmpresa) {
-    btnAccesoEmpresa.addEventListener('click', (e) => {
-        activarLoaderNavegacion(e);
-    });
-}

@@ -368,13 +368,6 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </select>
             </div>
         </div>
-        <script>
-            setTimeout(() => {
-                var map = L.map('map-<?php echo $row['id_reporte']; ?>', {zoomControl:false, dragging:false}).setView([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>], 15);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
-                L.marker([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>]).addTo(map);
-            }, 500);
-        </script>
         <?php } ?>
     </div>
     <div id="mapModal">
@@ -383,7 +376,16 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div id="modal-map" style="width:100%; height:100%; border-radius:20px;"></div>
         </div>
     </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+        window.addEventListener('load', () => {
+            <?php foreach($reportes as $row) { ?>
+                var map = L.map('map-<?php echo $row['id_reporte']; ?>', {zoomControl:false, dragging:false}).setView([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>], 15);
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '' }).addTo(map);
+                L.marker([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>]).addTo(map);
+            <?php } ?>
+            setTimeout(() => toggleLoader(false), 800);
+        });
         function toggleLoader(show, mensaje = "Procesando...") {
             const modal = document.getElementById('loader-modal');
             const text = document.getElementById('loader-message');
@@ -391,38 +393,24 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             modal.style.display = show ? 'flex' : 'none';
         }
 
-        window.addEventListener('load', () => {
-            setTimeout(() => toggleLoader(false), 800);
-        });
-
-        document.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (!this.getAttribute('href').includes('logout')) {
-                    toggleLoader(true, "Cargando página...");
-                }
-            });
-        });
+        function abrirModal(lat, lon) {
+            document.getElementById('mapModal').style.display = 'flex';
+            if (window.modalMap) { window.modalMap.remove(); }
+            window.modalMap = L.map('modal-map').setView([lat, lon], 16);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '' }).addTo(window.modalMap);
+            L.marker([lat, lon]).addTo(window.modalMap);
+        }
 
         function actualizarEstado(id, nuevoEstado) {
-            document.getElementById('loader-modal').style.display = 'flex';
-
+            toggleLoader(true, "Actualizando estado...");
             let formData = new FormData();
             formData.append('id', id);
             formData.append('estado', nuevoEstado);
-
             fetch('procesar_estado.php', { method: 'POST', body: formData })
             .then(() => {
-                location.reload(); 
+                setTimeout(() => location.reload(), 2500); 
             });
         }
-        let modalMap;
-            function abrirModal(lat, lon) {
-                document.getElementById('mapModal').style.display = 'flex';
-                if (modalMap) { modalMap.remove(); }
-                modalMap = L.map('modal-map').setView([lat, lon], 16);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(modalMap);
-                L.marker([lat, lon]).addTo(modalMap);
-            }
     </script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>

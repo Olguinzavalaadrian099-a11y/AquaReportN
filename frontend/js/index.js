@@ -3,8 +3,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const loader = document.getElementById('loader-modal');
 
     if (form && loader) {
-        form.addEventListener('submit', function() {
+        form.addEventListener('submit', function(e) {
             loader.style.display = 'flex'; 
+
+            const formData = new FormData(this);
+
+            fetch('/backend/procesar_reporte.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                const idReporte = data.trim(); 
+                window.location.href = '/frontend/reporte.html?id=' + idReporte; 
+            })
+            .catch(error => {
+                loader.style.display = 'none'; 
+                alert("Ocurrió un error al enviar el reporte.");
+            });
         });
     }
 

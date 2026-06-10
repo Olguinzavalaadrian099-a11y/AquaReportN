@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-const form = document.querySelector('form');
+    const form = document.querySelector('form');
     const loader = document.getElementById('loader-modal');
 
     if (form && loader) {
-        form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', function(e) {
+            e.preventDefault();
             loader.style.display = 'flex'; 
 
             const formData = new FormData(this);
@@ -14,6 +15,7 @@ const form = document.querySelector('form');
             })
             .then(response => response.text())
             .then(data => {
+                const idReal = data.trim();
                 window.location.href = '/frontend/reporte.html?id=' + data.trim(); 
             })
             .catch(error => {

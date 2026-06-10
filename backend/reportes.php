@@ -42,49 +42,47 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         nav { 
-            background: rgba(7, 27, 52, 0.95); 
+            background: linear-gradient(to bottom, rgba(7, 27, 52, 0.98) 0%, rgba(7, 27, 52, 0.85) 45%, rgba(7, 27, 52, 0.45) 75%, rgba(7, 27, 52, 0) 100%); 
             padding: 1rem 2rem; 
             position: fixed; 
             width: 100%; 
             top: 0; 
             z-index: 1000; 
-            backdrop-filter: blur(5px); 
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(1px); 
         }
 
         .nav-container { 
             display: flex; 
             justify-content: space-between; 
-            align-items: center; 
+            align-items: center;
             max-width: 1200px; 
             margin: 0 auto; 
             flex-wrap: wrap;
-            gap: 15px;
         }
 
         .logo { 
-            height: 60px;
+            height: clamp(140px, 18vh, 240px); 
             width: auto; 
             object-fit: contain; 
+            display: block; 
         }
 
         .nav-links { 
             display: flex; 
-            gap: 1rem; 
-            list-style: none;
-            align-items: center;
+            gap: 2rem; 
+            list-style: none; 
         }
 
         .nav-links a { 
             color: white; 
             text-decoration: none; 
-            font-weight: 600; 
-            padding: 10px 20px; 
-            border: 1px solid #63A4FF; 
-            border-radius: 25px; 
-            font-size: 0.9rem; 
-            transition: 0.3s ease;
-            background: transparent;
+            font-weight: 500; 
+            transition: 0.4s ease; 
+            position: relative; 
+            background: linear-gradient(-45deg, #63A4FF 0%, #83EAF1 100%); 
+            -webkit-background-clip: text; 
+            background-clip: text; 
+            -webkit-text-fill-color: transparent; 
         }
 
         .nav-links a:not(:hover) { 
@@ -330,7 +328,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             .nav-container { 
                 flex-direction: column; 
                 text-align: center; 
-                padding: 15px;
+                padding: 10px;
             }
         }
 
@@ -372,6 +370,9 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="info-data">
                 <span class="report-id">Reporte #<?php echo $row['id_reporte']; ?></span>
                 <p><strong>Usuario:</strong> <?php echo htmlspecialchars($row['nombre_completo']); ?></p>
+                            <p style="font-size: 0.85rem; color: #83EAF1; margin-top: -10px;">
+                    Lat: <?php echo $row['latitud']; ?>, Lon: <?php echo $row['longitud']; ?>
+                </p>
                 <select id="select-<?php echo $row['id_reporte']; ?>" class="select-estado" onchange="actualizarEstado(<?php echo $row['id_reporte']; ?>, this.value)">
                     <option value="Pendiente" <?php if($row['estado'] == 'Pendiente') echo 'selected'; ?>>Pendiente</option>
                     <option value="En proceso" <?php if($row['estado'] == 'En proceso') echo 'selected'; ?>>En proceso</option>

@@ -14,7 +14,7 @@ const form = document.querySelector('form');
             })
             .then(response => response.text())
             .then(data => {
-                window.location.href = '/frontend/reporte.html?id=exito'; 
+                window.location.href = '/frontend/reporte.html?id=' + data.trim(); 
             })
             .catch(error => {
                 loader.style.display = 'none'; 

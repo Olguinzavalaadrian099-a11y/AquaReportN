@@ -183,6 +183,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             font-size: 0.8rem;
             margin-top: 10px;
         }
+
         h1 {
             text-align: center;
             margin-bottom: 50px;
@@ -194,6 +195,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             -webkit-text-fill-color: transparent;
             text-shadow: 0 5px 15px rgba(99, 164, 255, 0.2);
         }
+
         .container-loader {
             display: flex;
             align-items: center;
@@ -229,9 +231,9 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             to {
                 transform: translate(-50%, -50%) rotateX(45deg) rotateZ(360deg);
             }
-            }
+        }
 
-            @keyframes emerge {
+        @keyframes emerge {
             0%,
             100% {
                 transform: translate(-50%, -50%) scale(0.5);
@@ -248,34 +250,34 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 visibility: visible;
                 opacity: 0.8;
             }
-            }
+        }
 
-            .crystal:nth-child(1) {
+        .crystal:nth-child(1) {
             background: linear-gradient(45deg, #003366, #336699);
             animation-delay: 0s;
-            }
+        }
 
-            .crystal:nth-child(2) {
+        .crystal:nth-child(2) {
             background: linear-gradient(45deg, #003399, #3366cc);
             animation-delay: 0.3s;
-            }
+        }
 
-            .crystal:nth-child(3) {
+        .crystal:nth-child(3) {
             background: linear-gradient(45deg, #0066cc, #3399ff);
             animation-delay: 0.6s;
-            }
+        }
 
-            .crystal:nth-child(4) {
+        .crystal:nth-child(4) {
             background: linear-gradient(45deg, #0099ff, #66ccff);
             animation-delay: 0.9s;
-            }
+        }
 
-            .crystal:nth-child(5) {
+        .crystal:nth-child(5) {
             background: linear-gradient(45deg, #33ccff, #99ccff);
             animation-delay: 1.2s;
-            }
+        }
 
-            .crystal:nth-child(6) {
+        .crystal:nth-child(6) {
             background: linear-gradient(45deg, #66ffff, #ccffff);
             animation-delay: 1.5s;
         }
@@ -318,6 +320,11 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         .container-loader .loader {
             margin: 20px 0;
+        }
+
+        #mapModal { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; 
         }
 
     </style>

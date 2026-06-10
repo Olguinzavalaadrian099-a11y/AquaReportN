@@ -344,3 +344,43 @@ input:required:valid {
   background: linear-gradient(45deg, #66ffff, #ccffff);
   animation-delay: 1.5s;
 }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(7, 27, 52, 0.6); 
+    backdrop-filter: blur(10px);             
+    -webkit-backdrop-filter: blur(10px);
+    display: none;                           
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader-box {
+    background: rgba(7, 27, 52, 0.9);
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(111, 197, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+}
+
+.loader-text {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: Arial, sans-serif;
+    letter-spacing: 1px;
+}
+
+.container .loader {
+    margin: 20px 0;
+}

@@ -131,8 +131,9 @@ $reportes = $stmt->fetchAll();
         }
 
         .select-estado { 
-            width: 150px;
-            padding: 8px 10px; 
+            width: 160px;
+            margin: 15px auto 0 auto;
+            padding: 10px; 
             border-radius: 100px; 
             border: none; 
             background: linear-gradient(-45deg, #63A4FF 0%, #83EAF1 100%); color: #ffffff; 
@@ -328,14 +329,10 @@ $reportes = $stmt->fetchAll();
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         <?php foreach($reportes as $row) { ?>
-            (function() {
-                var map = L.map('map-<?php echo $row['id_reporte']; ?>', {zoomControl: false, dragging: false})
-                           .setView([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>], 15);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                    attribution: '' 
-                }).addTo(map);
-                L.marker([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>]).addTo(map);
-            })();
+            var map = L.map('map-<?php echo $row['id_reporte']; ?>', {zoomControl: false, dragging: false})
+                       .setView([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>], 14);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '' }).addTo(map);
+            L.marker([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>]).addTo(map);
         <?php } ?>
         function actualizarEstado(id, nuevoEstado) {
             document.getElementById('loader-modal').style.display = 'flex';

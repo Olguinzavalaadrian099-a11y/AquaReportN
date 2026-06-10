@@ -170,6 +170,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         .select-estado {
             width: 160px;
+            margin: 15px auto 0 auto;
             padding: 10px;
             appearance: none;
             -webkit-appearance: none;
@@ -371,22 +372,24 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <?php } ?>
     </div>
-    <div id="mapModal">
-        <div style="width:80%; height:70%; background:#071b34; border-radius:20px; position:relative;">
-            <span onclick="document.getElementById('mapModal').style.display='none'" style="position:absolute; top:10px; right:20px; cursor:pointer; font-size:30px; color:white;">&times;</span>
-            <div id="modal-map" style="width:100%; height:100%; border-radius:20px;"></div>
-        </div>
-    </div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         window.addEventListener('load', () => {
-            <?php foreach($reportes as $row) { ?>
-                var map = L.map('map-<?php echo $row['id_reporte']; ?>', {zoomControl:false, dragging:false}).setView([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>], 15);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '' }).addTo(map);
-                L.marker([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>]).addTo(map);
-            <?php } ?>
-            setTimeout(() => toggleLoader(false), 800);
-        });
+        <?php foreach($reportes as $row) { ?>
+            var map = L.map('map-<?php echo $row['id_reporte']; ?>', {
+                zoomControl: false, 
+                dragging: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false
+            }).setView([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>], 14);
+            
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { 
+                attribution: '' 
+            }).addTo(map);
+            
+            L.marker([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>]).addTo(map);
+        <?php } ?>
+    });
         function toggleLoader(show, mensaje = "Procesando...") {
             const modal = document.getElementById('loader-modal');
             const text = document.getElementById('loader-message');

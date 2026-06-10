@@ -362,22 +362,22 @@ input:required:valid {
 
 .loader-box {
     background: rgba(7, 27, 52, 0.9);
-    padding: 40px;
+    padding: 25px 30px;
     border-radius: 24px;
     border: 1px solid rgba(111, 197, 255, 0.2);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     text-align: center;
+    max-width: 250px;
 }
 
 .loader-text {
-    color: #ffffff;
-    font-size: 1.2rem;
+    color: #33ccff;
+    font-size: 1rem;
     font-weight: 600;
-    font-family: Arial, sans-serif;
     letter-spacing: 1px;
 }
 

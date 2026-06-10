@@ -194,9 +194,149 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             -webkit-text-fill-color: transparent;
             text-shadow: 0 5px 15px rgba(99, 164, 255, 0.2);
         }
+        .container-loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 800px;
+        }
+
+        .crystal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            opacity: 0;
+            transform-origin: bottom center;
+            transform: translate(-50%, -50%) rotateX(45deg) rotateZ(0deg);
+            animation: spin 4s linear infinite, emerge 2s ease-in-out infinite alternate,
+                fadeIn 0.3s ease-out forwards;
+            border-radius: 10px;
+            visibility: hidden;
+        }
+
+        @keyframes spin {
+            from {
+                transform: translate(-50%, -50%) rotateX(45deg) rotateZ(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotateX(45deg) rotateZ(360deg);
+            }
+            }
+
+            @keyframes emerge {
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                visibility: visible;
+                opacity: 0.8;
+            }
+            }
+
+            .crystal:nth-child(1) {
+            background: linear-gradient(45deg, #003366, #336699);
+            animation-delay: 0s;
+            }
+
+            .crystal:nth-child(2) {
+            background: linear-gradient(45deg, #003399, #3366cc);
+            animation-delay: 0.3s;
+            }
+
+            .crystal:nth-child(3) {
+            background: linear-gradient(45deg, #0066cc, #3399ff);
+            animation-delay: 0.6s;
+            }
+
+            .crystal:nth-child(4) {
+            background: linear-gradient(45deg, #0099ff, #66ccff);
+            animation-delay: 0.9s;
+            }
+
+            .crystal:nth-child(5) {
+            background: linear-gradient(45deg, #33ccff, #99ccff);
+            animation-delay: 1.2s;
+            }
+
+            .crystal:nth-child(6) {
+            background: linear-gradient(45deg, #66ffff, #ccffff);
+            animation-delay: 1.5s;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(7, 27, 52, 0.6); 
+            backdrop-filter: blur(10px);             
+            -webkit-backdrop-filter: blur(10px);
+            display: none;                           
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader-box {
+            background: rgba(7, 27, 52, 0.9);
+            padding: 25px 30px;
+            border-radius: 24px;
+            border: 1px solid rgba(111, 197, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            text-align: center;
+            max-width: 250px;
+        }
+
+        .loader-text {
+            color: #33ccff;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .container-loader .loader {
+            margin: 20px 0;
+        }
+
     </style>
 </head>
 <body>
+    <div class="modal-overlay" id="loader-modal">
+        <div class="loader-box">
+            <div class="container-loader"> <div class="loader">
+                    <div class="crystal"></div>
+                    <div class="crystal"></div>
+                    <div class="crystal"></div>
+                    <div class="crystal"></div>
+                    <div class="crystal"></div>
+                    <div class="crystal"></div>
+                </div>
+            </div>
+            <p class="loader-text" id="loader-message">Procesando...</p>
+        </div>
+    </div>
     <div class="page-bg"></div>
     <nav>
         <div class="nav-container">
@@ -208,59 +348,66 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </nav>
     <div class="container">
         <h1>Reportes Recibidos</h1>
-        <?php foreach($reportes as $row) { 
-            $estado = str_replace(' ', '_', $row['estado']); ?>
+        <?php foreach($reportes as $row) { ?>
         <div class="report-card">
-    <div id="map-<?php echo $row['id_reporte']; ?>" class="map-box"></div>
-        <div class="info-data">
-            <div>
+            <div id="map-<?php echo $row['id_reporte']; ?>" class="map-box" onclick="abrirModal(<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>)"></div>
+            <div class="info-data">
                 <span class="report-id">Reporte #<?php echo $row['id_reporte']; ?></span>
                 <p><strong>Usuario:</strong> <?php echo htmlspecialchars($row['nombre_completo']); ?></p>
-            </div>
-            
-            <div>
-                <p class="coords">Lat: <?php echo $row['latitud']; ?> | Lon: <?php echo $row['longitud']; ?></p>
-                
-                <select id="select-<?php echo $row['id_reporte']; ?>" 
-                        class="select-estado" 
-                        onchange="actualizarEstado(<?php echo $row['id_reporte']; ?>, this.value)">
+                <select id="select-<?php echo $row['id_reporte']; ?>" class="select-estado" onchange="actualizarEstado(<?php echo $row['id_reporte']; ?>, this.value)">
                     <option value="Pendiente" <?php if($row['estado'] == 'Pendiente') echo 'selected'; ?>>Pendiente</option>
                     <option value="En proceso" <?php if($row['estado'] == 'En proceso') echo 'selected'; ?>>En proceso</option>
                     <option value="Resuelto" <?php if($row['estado'] == 'Resuelto') echo 'selected'; ?>>Resuelto</option>
                 </select>
             </div>
         </div>
-    </div>
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         <script>
-            var map = L.map('map-<?php echo $row['id_reporte']; ?>', {
-                zoomControl: false, 
-                dragging: false,
-                attributionControl: false 
-            }).setView([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>], 15);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                subdomains: 'abcd',
-                maxZoom: 19
-            }).addTo(map);
-
-            L.marker([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>]).addTo(map);
+            setTimeout(() => {
+                var map = L.map('map-<?php echo $row['id_reporte']; ?>', {zoomControl:false, dragging:false}).setView([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>], 15);
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
+                L.marker([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>]).addTo(map);
+            }, 500);
         </script>
         <?php } ?>
     </div>
+    <div id="mapModal">
+        <div style="width:80%; height:70%; background:#071b34; border-radius:20px; position:relative;">
+            <span onclick="document.getElementById('mapModal').style.display='none'" style="position:absolute; top:10px; right:20px; cursor:pointer; font-size:30px; color:white;">&times;</span>
+            <div id="modal-map" style="width:100%; height:100%; border-radius:20px;"></div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-    function actualizarEstado(id, nuevoEstado) {
-        let select = document.getElementById('select-' + id);
-        let formData = new FormData();
-        formData.append('id', id);
-        formData.append('estado', nuevoEstado);
-        
-        fetch('procesar_estado.php', { method: 'POST', body: formData })
-        .then(response => {
-            if(response.ok) {
-                select.className = 'select-estado st-' + nuevoEstado.replace(' ', '_');
-            }
+        function toggleLoader(show, mensaje = "Procesando...") {
+            const modal = document.getElementById('loader-modal');
+            const text = document.getElementById('loader-message');
+            text.innerText = mensaje;
+            modal.style.display = show ? 'flex' : 'none';
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => toggleLoader(false), 800);
         });
-    }
+
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (!this.getAttribute('href').includes('logout')) {
+                    toggleLoader(true, "Cargando página...");
+                }
+            });
+        });
+
+        function actualizarEstado(id, nuevoEstado) {
+            toggleLoader(true, "Actualizando estado...");
+            let formData = new FormData();
+            formData.append('id', id);
+            formData.append('estado', nuevoEstado);
+            
+            fetch('procesar_estado.php', { method: 'POST', body: formData })
+            .then(() => {
+                location.reload(); 
+            });
+        }
     </script>
 </body>
 </html>

@@ -208,7 +208,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </nav>
     <div class="container">
         <h1>Reportes Recibidos</h1>
-        <?php while($row = $resultado->fetch_assoc()) { 
+        <?php foreach($reportes as $row) { 
             $estado = str_replace(' ', '_', $row['estado']); ?>
         <div class="report-card">
     <div id="map-<?php echo $row['id_reporte']; ?>" class="map-box"></div>

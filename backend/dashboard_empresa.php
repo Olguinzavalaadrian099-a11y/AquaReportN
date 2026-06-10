@@ -14,6 +14,7 @@ $reportes = $stmt->fetchAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AquaReport - Reportes</title>
+    <link rel="stylesheet" href="/frontend/css/index.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         * { 
@@ -28,7 +29,7 @@ $reportes = $stmt->fetchAll();
             left: 0; 
             width: 100%; 
             height: 100%; 
-            background-image: url('frontend/img/fondo3.png'); 
+            background-image: url('/frontend/img/fondo3.png'); 
             background-size: cover; 
             background-position: center; 
             filter: brightness(0.4); 
@@ -148,7 +149,7 @@ $reportes = $stmt->fetchAll();
     <div class="page-bg"></div>
     <nav>
         <div class="nav-container">
-            <img src="../frontend/img/logo.png" alt="Logo" class="logo">
+            <img src="/frontend/img/logo.png" alt="Logo" class="logo">
             <ul class="nav-links">
                 <li><a href="logout.php">Cerrar Sesión</a></li>
             </ul>

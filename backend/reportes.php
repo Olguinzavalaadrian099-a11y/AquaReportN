@@ -61,7 +61,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         .logo { 
-            height: 60px;
+            height: clamp(140px, 18vh, 240px);
             width: auto; 
             object-fit: contain; 
             display: block; 
@@ -334,24 +334,27 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             margin: 20px 0;
         }
 
-       @media (max-width: 600px) {
+       @media (max-width: 768px) {
             .menu-btn {
-                display: block; 
+                display: block !important; 
+                z-index: 1001;
             }
 
             .nav-links {
-                display: none;
+                display: none; 
+                flex-direction: column;
                 position: absolute;
-                top: 80px;
+                top: 70px;
                 right: 20px;
                 background: rgba(10, 25, 45, 0.95);
                 padding: 20px;
                 border-radius: 15px;
-                border: 1px solid rgba(255,255,255,0.1);
+                border: 1px solid rgba(111, 197, 255, 0.3);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             }
 
             .nav-links.active {
-                display: flex;
+                display: flex !important; 
             }
         }
 
@@ -400,7 +403,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div style="font-size: 0.85rem; color: #ccc; margin-top: 8px; line-height: 1.4; border-left: 2px solid #63A4FF; padding-left: 10px;">
                     <p><strong>Ref:</strong> <?php echo htmlspecialchars($row['referencias']); ?></p>
                     <p style="margin-top: 5px; opacity: 0.8;">
-                        <strong>Fecha:</strong> <?php echo date("d/m/Y H:i", strtotime($row['fecha_reporte'])); ?>
+                        <strong>Fecha:</strong> <?php echo date("d/m/Y", strtotime($row['fecha_reporte'])); ?>
                     </p>
                 </div>
                 <select id="select-<?php echo $row['id_reporte']; ?>" class="select-estado" onchange="actualizarEstado(<?php echo $row['id_reporte']; ?>, this.value)">

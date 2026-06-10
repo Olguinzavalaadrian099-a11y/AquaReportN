@@ -43,15 +43,14 @@ $reportes = $stmt->fetchAll();
         }
 
         nav { 
-            background: linear-gradient(to bottom, rgba(7, 27, 52, 0.98) 0%, rgba(7, 27, 52, 0.85) 45%, rgba(7, 27, 52, 0.45) 75%, rgba(7, 27, 52, 0) 100%); 
+            background: rgba(7, 27, 52, 0.95); 
             padding: 1rem 2rem; 
             position: fixed; 
-            width: 100%;
-            min-height: 80px;
-            height: auto; 
+            width: 100%; 
             top: 0; 
             z-index: 1000; 
-            backdrop-filter: blur(1px); 
+            backdrop-filter: blur(5px); 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .nav-container { 
@@ -60,13 +59,12 @@ $reportes = $stmt->fetchAll();
             align-items: center; 
             max-width: 1200px; 
             margin: 0 auto; 
-            padding: 10px;
             flex-wrap: wrap;
             gap: 15px;
         }
 
         .logo { 
-            height: clamp(140px, 18vh, 240px); 
+            height: 60px;
             width: auto; 
             object-fit: contain; 
         }
@@ -75,17 +73,19 @@ $reportes = $stmt->fetchAll();
             display: flex; 
             gap: 1rem; 
             list-style: none;
-            z-index: 1001; 
+            align-items: center;
         }
 
         .nav-links a { 
             color: white; 
             text-decoration: none; 
-            font-weight: 500; 
-            background: linear-gradient(-45deg, #63A4FF 0%, #83EAF1 100%); 
-            -webkit-background-clip: text; 
-            background-clip: text; 
-            -webkit-text-fill-color: transparent; 
+            font-weight: 600; 
+            padding: 10px 20px; 
+            border: 1px solid #63A4FF; 
+            border-radius: 25px; 
+            font-size: 0.9rem; 
+            transition: 0.3s ease;
+            background: transparent;
         }
 
         .container { 
@@ -281,11 +281,7 @@ $reportes = $stmt->fetchAll();
             .nav-container { 
                 flex-direction: column; 
                 text-align: center; 
-                padding: 10px;
-            }
-            
-            .logo { 
-                height: 80px;
+                padding: 15px;
             }
         }
 

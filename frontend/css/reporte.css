@@ -384,3 +384,7 @@ input:required:valid {
 .container .loader {
     margin: 20px 0;
 }
+
+.leaflet-control-attribution {
+    display: none !important;
+}

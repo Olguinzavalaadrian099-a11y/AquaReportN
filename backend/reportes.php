@@ -43,7 +43,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         nav { 
             background: linear-gradient(to bottom, rgba(7, 27, 52, 0.98) 0%, rgba(7, 27, 52, 0.85) 45%, rgba(7, 27, 52, 0.45) 75%, rgba(7, 27, 52, 0) 100%); 
-            padding: 1rem 2rem; 
+            padding: 10px 2rem; 
             position: fixed; 
             width: 100%; 
             top: 0; 
@@ -57,7 +57,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             align-items: center;
             max-width: 1200px; 
             margin: 0 auto; 
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
 
         .logo { 
@@ -71,6 +71,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             display: flex; 
             gap: 2rem; 
             list-style: none; 
+            white-space: nowrap;
         }
 
         .nav-links a { 
@@ -325,10 +326,15 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         @media (max-width: 600px) {
-            .nav-container { 
-                flex-direction: column; 
-                text-align: center; 
-                padding: 10px;
+            nav { padding: 10px 1rem; } 
+            
+            .logo { 
+                height: 50px; 
+            }
+            
+            .nav-links a { 
+                font-size: 0.8rem;
+                padding: 8px 12px;
             }
         }
 
@@ -373,6 +379,12 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <p style="font-size: 0.85rem; color: #83EAF1; margin-top: -10px;">
                     Lat: <?php echo $row['latitud']; ?>, Lon: <?php echo $row['longitud']; ?>
                 </p>
+                <div style="font-size: 0.85rem; color: #ccc; margin-top: 8px; line-height: 1.4; border-left: 2px solid #63A4FF; padding-left: 10px;">
+                    <p><strong>Ref:</strong> <?php echo htmlspecialchars($row['referencias']); ?></p>
+                    <p style="margin-top: 5px; opacity: 0.8;">
+                        <strong>Fecha:</strong> <?php echo date("d/m/Y H:i", strtotime($row['fecha_reporte'])); ?>
+                    </p>
+                </div>
                 <select id="select-<?php echo $row['id_reporte']; ?>" class="select-estado" onchange="actualizarEstado(<?php echo $row['id_reporte']; ?>, this.value)">
                     <option value="Pendiente" <?php if($row['estado'] == 'Pendiente') echo 'selected'; ?>>Pendiente</option>
                     <option value="En proceso" <?php if($row['estado'] == 'En proceso') echo 'selected'; ?>>En proceso</option>

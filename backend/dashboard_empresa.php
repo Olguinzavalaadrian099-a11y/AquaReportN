@@ -352,7 +352,7 @@ $reportes = $stmt->fetchAll();
             <div class="info-data">
                 <span class="report-id">Reporte #<?php echo $row['id_reporte']; ?></span>
                 <p><strong>Usuario:</strong> <?php echo htmlspecialchars($row['nombre_completo']); ?></p>
-                            <p style="font-size: 0.85rem; color: #83EAF1; margin-top: -10px;">
+                            <p style="font-size: 0.85rem; color: #ffffff; margin-top: -10px;">
                     Lat: <?php echo $row['latitud']; ?>, Lon: <?php echo $row['longitud']; ?>
                 </p>
                 <div style="font-size: 0.85rem; color: #ccc; margin-top: 8px; line-height: 1.4; border-left: 2px solid #63A4FF; padding-left: 10px;">

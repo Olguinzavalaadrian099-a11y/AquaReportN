@@ -1,3 +1,9 @@
+window.addEventListener('pageshow', function (event) {
+    const loader = document.getElementById('loader-modal');
+    if (loader) {
+        loader.style.display = 'none';
+    }
+});
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
     const loader = document.getElementById('loader-modal');
@@ -159,3 +165,22 @@ window.onload = function() {
         }
     }
 };
+function activarLoaderNavegacion(event) {
+    const loader = document.getElementById('loader-modal');
+    
+    event.preventDefault();
+    const url = event.currentTarget.getAttribute('href');
+
+    if (loader) {
+        loader.style.display = 'flex';
+    }
+    setTimeout(() => {
+        window.location.href = url;
+    }, 1500);
+}
+const btnAccesoEmpresa = document.querySelector('a[href="/backend/login.php"]');
+if (btnAccesoEmpresa) {
+    btnAccesoEmpresa.addEventListener('click', (e) => {
+        activarLoaderNavegacion(e);
+    });
+}

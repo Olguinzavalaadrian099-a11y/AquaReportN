@@ -1,18 +1,6 @@
 <?php
-include 'conexion.php';
+$contrasena_plana = "admin123";
+$hash = password_hash($contrasena_plana, PASSWORD_DEFAULT);
 
-$nombre_usuario = 'adrian_olguin'; 
-$password_plano = 'admin123'; 
-$rol = 'admin';
-
-$password_hash = password_hash($password_plano, PASSWORD_DEFAULT);
-
-try {
-    $sql = "INSERT INTO usuarios (nombre, password, rol) VALUES (?, ?, ?)";
-    $stmt = $conexion->prepare($sql);
-    $stmt->execute([$nombre_usuario, $password_hash, $rol]);
-    echo "¡Usuario '$nombre_usuario' creado correctamente!";
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
+echo "El hash generado es: $2y$10$q1maT7K1XwJ7N7mWKtYKWumzaXMnBvrVAkZ.dq0DVvoSGrhsS63dy" . $hash;
 ?>

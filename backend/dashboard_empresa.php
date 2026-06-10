@@ -46,7 +46,9 @@ $reportes = $stmt->fetchAll();
             background: linear-gradient(to bottom, rgba(7, 27, 52, 0.98) 0%, rgba(7, 27, 52, 0.85) 45%, rgba(7, 27, 52, 0.45) 75%, rgba(7, 27, 52, 0) 100%); 
             padding: 1rem 2rem; 
             position: fixed; 
-            width: 100%; 
+            width: 100%;
+            min-height: 80px;
+            height: auto; 
             top: 0; 
             left: 0; 
             z-index: 1000; 
@@ -59,6 +61,8 @@ $reportes = $stmt->fetchAll();
             align-items: center; 
             max-width: 1200px; 
             margin: 0 auto; 
+            padding: 10px;
+            flex-wrap: wrap;
         }
 
         .logo { 
@@ -69,8 +73,9 @@ $reportes = $stmt->fetchAll();
 
         .nav-links { 
             display: flex; 
-            gap: 2rem; 
-            list-style: none; 
+            gap: 1rem; 
+            list-style: none;
+            z-index: 1001; 
         }
 
         .nav-links a { 
@@ -126,12 +131,13 @@ $reportes = $stmt->fetchAll();
         }
 
         .select-estado { 
-            padding: 12px 30px; 
+            padding: 8px 20px; 
             border-radius: 100px; 
             border: none; 
             background: linear-gradient(-45deg, #63A4FF 0%, #83EAF1 100%); color: #ffffff; 
             font-weight: bold; cursor: pointer; 
             text-transform: uppercase; 
+            font-size: 0.7rem;
         }
 
         h1 { 
@@ -269,6 +275,23 @@ $reportes = $stmt->fetchAll();
             margin: 20px 0;
         }
 
+        #mapModal {
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 99999; 
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        #mapModal > div {
+            width: 100% !important;
+            height: 80% !important; 
+            position: relative;
+        }
+
     </style>
 </head>
 <body>
@@ -318,7 +341,9 @@ $reportes = $stmt->fetchAll();
             (function() {
                 var map = L.map('map-<?php echo $row['id_reporte']; ?>', {zoomControl: false, dragging: false})
                            .setView([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>], 15);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                    attribution: '' 
+                }).addTo(map);
                 L.marker([<?php echo $row['latitud']; ?>, <?php echo $row['longitud']; ?>]).addTo(map);
             })();
         <?php } ?>
@@ -333,7 +358,9 @@ $reportes = $stmt->fetchAll();
             .then(response => response.text())
             .then(data => {
                 if (data.trim() === "Éxito") {
-                    location.reload();
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2500);
                 } else {
                     alert("Error: " + data);
                     document.getElementById('loader-modal').style.display = 'none';
@@ -343,6 +370,20 @@ $reportes = $stmt->fetchAll();
                 alert("Error de conexión");
                 document.getElementById('loader-modal').style.display = 'none';
             });
+        }
+        let modalMap;
+        function abrirModal(lat, lon) {
+            const modal = document.getElementById('mapModal');
+            modal.style.display = 'flex';
+            if (modalMap) { modalMap.remove(); }
+            modalMap = L.map('modal-map').setView([lat, lon], 16);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: ''
+            }).addTo(modalMap);
+            L.marker([lat, lon]).addTo(modalMap);
+        }
+        function cerrarModal() {
+            document.getElementById('mapModal').style.display = 'none';
         }
     </script>
 </body>

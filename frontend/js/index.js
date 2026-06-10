@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.text())
             .then(data => {
                 const idReal = data.trim();
-                window.location.href = '/frontend/reporte.html?id=' + data.trim(); 
+                window.location.href = '/frontend/reporte.html?id=' + idReal; 
             })
             .catch(error => {
                 loader.style.display = 'none'; 

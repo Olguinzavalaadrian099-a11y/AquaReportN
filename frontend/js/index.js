@@ -1,26 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-const form = document.querySelector('form');
+    const form = document.querySelector('form');
     const loader = document.getElementById('loader-modal');
 
     if (form && loader) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); 
+        form.addEventListener('submit', function() {
             loader.style.display = 'flex'; 
-
-            const formData = new FormData(this);
-
-            fetch('/backend/procesar_reporte.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                window.location.href = '/frontend/reporte.html?id=exito'; 
-            })
-            .catch(error => {
-                loader.style.display = 'none'; 
-                alert("Ocurrió un error al enviar el reporte.");
-            });
         });
     }
 

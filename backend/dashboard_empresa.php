@@ -187,7 +187,25 @@ $reportes = $stmt->fetchAll();
         let formData = new FormData();
         formData.append('id', id);
         formData.append('estado', nuevoEstado);
-        fetch('procesar_estado.php', { method: 'POST', body: formData });
+        
+        let selectElement = document.getElementById('select-' + id);
+        
+        selectElement.style.transition = "background 0.3s";
+        selectElement.style.background = "#ffffff"; 
+    
+        fetch('procesar_estado.php', { 
+            method: 'POST', 
+            body: formData 
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.trim() === "Éxito") {
+                selectElement.style.background = "linear-gradient(-45deg, #63A4FF 0%, #83EAF1 100%)";
+            } else {
+                alert("Error al actualizar: " + data);
+            }
+        })
+        .catch(error => alert("Error de conexión"));
     }
     </script>
 </body>

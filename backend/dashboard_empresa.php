@@ -50,7 +50,6 @@ $reportes = $stmt->fetchAll();
             min-height: 80px;
             height: auto; 
             top: 0; 
-            left: 0; 
             z-index: 1000; 
             backdrop-filter: blur(1px); 
         }
@@ -63,6 +62,7 @@ $reportes = $stmt->fetchAll();
             margin: 0 auto; 
             padding: 10px;
             flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo { 
@@ -278,9 +278,19 @@ $reportes = $stmt->fetchAll();
         }
 
         @media (max-width: 600px) {
-            .report-card { grid-template-columns: 1fr; text-align: center; justify-items: center; }
-            .map-box { width: 100%; height: 150px; }
-            .nav-container { flex-direction: column; gap: 15px; }
+            .nav-container { 
+                flex-direction: column; 
+                text-align: center; 
+                padding: 10px;
+            }
+            
+            .logo { 
+                height: 80px;
+            }
+        }
+
+        .leaflet-control-attribution {
+            display: none !important;
         }
 
     </style>

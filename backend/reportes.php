@@ -47,7 +47,6 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             position: fixed; 
             width: 100%; 
             top: 0; 
-            left: 0; 
             z-index: 1000; 
             backdrop-filter: blur(1px); 
         }
@@ -58,6 +57,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             align-items: center;
             max-width: 1200px; 
             margin: 0 auto; 
+            flex-wrap: wrap;
         }
 
         .logo { 
@@ -325,8 +325,19 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         @media (max-width: 600px) {
-            .report-card { grid-template-columns: 1fr; text-align: center; }
-            .map-box { width: 100%; }
+            .nav-container { 
+                flex-direction: column; 
+                text-align: center; 
+                padding: 10px;
+            }
+            
+            .logo { 
+                height: 80px; 
+            }
+        }
+
+        .leaflet-control-attribution {
+            display: none !important;
         }
 
     </style>

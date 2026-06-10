@@ -462,12 +462,11 @@ const menuBtn = document.getElementById('menuBtn');
         }
     const loginForm = document.getElementById('login-form');
     const loaderModal = document.getElementById('loader-modal');
-
-    if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
+    loginForm.addEventListener('submit', function(event) {
+        if (loaderModal) {
             loaderModal.style.display = 'flex';
-        });
-    }
+        }
+    });
 </script>
 </body>
 </html>

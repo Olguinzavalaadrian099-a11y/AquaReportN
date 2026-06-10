@@ -153,7 +153,7 @@ $reportes = $stmt->fetchAll();
             background-clip: text; 
             -webkit-text-fill-color: transparent; 
         }
-        
+
         .container-loader {
             display: flex;
             align-items: center;
@@ -318,6 +318,7 @@ $reportes = $stmt->fetchAll();
     <nav>
         <div class="nav-container">
             <img src="/frontend/img/logo.png" alt="Logo" class="logo">
+            <button class="menu-btn" id="menuBtn">☰</button>
             <ul class="nav-links">
                 <li><a href="logout.php">Cerrar Sesión</a></li>
             </ul>
@@ -379,6 +380,18 @@ $reportes = $stmt->fetchAll();
             .catch(() => {
                 alert("Error de conexión");
                 document.getElementById('loader-modal').style.display = 'none';
+            });
+        }
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        window.addEventListener('pageshow', () => { document.body.style.opacity = "1"; });
+        
+        if (menuBtn && navLinks) {
+            menuBtn.addEventListener("click", () => {
+                const isActive = navLinks.classList.toggle("active");
+                menuBtn.classList.toggle("menu-active-rotate", isActive);
+                menuBtn.textContent = isActive ? "×" : "☰";
             });
         }
     </script>

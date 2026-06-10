@@ -61,10 +61,19 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         .logo { 
-            height: clamp(140px, 18vh, 240px); 
+            height: 60px;
             width: auto; 
             object-fit: contain; 
             display: block; 
+        }
+
+        .menu-btn {
+            display: none; 
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
         }
 
         .nav-links { 
@@ -325,16 +334,24 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             margin: 20px 0;
         }
 
-        @media (max-width: 600px) {
-            nav { padding: 10px 1rem; } 
-            
-            .logo { 
-                height: 50px; 
+       @media (max-width: 600px) {
+            .menu-btn {
+                display: block; 
             }
-            
-            .nav-links a { 
-                font-size: 0.8rem;
-                padding: 8px 12px;
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                right: 20px;
+                background: rgba(10, 25, 45, 0.95);
+                padding: 20px;
+                border-radius: 15px;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
             }
         }
 
@@ -361,10 +378,10 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <div class="page-bg"></div>
     <nav>
-        <div class="nav-container">
+    <div class="nav-container">
             <img src="../frontend/img/logo.png" alt="Logo" class="logo">
             <button class="menu-btn" id="menuBtn">☰</button>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="logout.php">Cerrar Sesión</a></li>
             </ul>
         </div>
@@ -430,19 +447,13 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 setTimeout(() => location.reload(), 2500); 
             });
         }
-
         const menuBtn = document.getElementById('menuBtn');
-            const navLinks = document.getElementById('navLinks');
-            
-            window.addEventListener('pageshow', () => { document.body.style.opacity = "1"; });
-            
-            if (menuBtn && navLinks) {
-                menuBtn.addEventListener("click", () => {
-                    const isActive = navLinks.classList.toggle("active");
-                    menuBtn.classList.toggle("menu-active-rotate", isActive);
-                    menuBtn.textContent = isActive ? "×" : "☰";
-                });
-            }
+        const navLinks = document.getElementById('navLinks');
+
+        menuBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            menuBtn.textContent = navLinks.classList.contains("active") ? "×" : "☰";
+        });
     </script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>

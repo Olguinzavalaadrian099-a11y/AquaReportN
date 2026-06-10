@@ -67,7 +67,7 @@ $reportes = $stmt->fetchAll();
         }
 
         .logo { 
-            height: clamp(140px, 18vh, 240px); 
+            height: 60px; 
             width: auto; 
             object-fit: contain; 
         }
@@ -281,20 +281,37 @@ $reportes = $stmt->fetchAll();
         }
 
         @media (max-width: 600px) {
-            nav { padding: 10px 1rem; } 
-            
-            .logo { 
-                height: 50px; 
+            .menu-btn {
+                display: block; 
             }
-            
-            .nav-links a { 
-                font-size: 0.8rem; 
-                padding: 8px 12px;
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                right: 20px;
+                background: rgba(10, 25, 45, 0.95);
+                padding: 20px;
+                border-radius: 15px;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .nav-links.active {
+                display: flex; 
             }
         }
 
         .leaflet-control-attribution {
             display: none !important;
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
         }
 
     </style>
@@ -317,9 +334,9 @@ $reportes = $stmt->fetchAll();
     <div class="page-bg"></div>
     <nav>
         <div class="nav-container">
-            <img src="/frontend/img/logo.png" alt="Logo" class="logo">
+            <img src="../frontend/img/logo.png" alt="Logo" class="logo">
             <button class="menu-btn" id="menuBtn">☰</button>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="logout.php">Cerrar Sesión</a></li>
             </ul>
         </div>
@@ -384,16 +401,11 @@ $reportes = $stmt->fetchAll();
         }
         const menuBtn = document.getElementById('menuBtn');
         const navLinks = document.getElementById('navLinks');
-        
-        window.addEventListener('pageshow', () => { document.body.style.opacity = "1"; });
-        
-        if (menuBtn && navLinks) {
-            menuBtn.addEventListener("click", () => {
-                const isActive = navLinks.classList.toggle("active");
-                menuBtn.classList.toggle("menu-active-rotate", isActive);
-                menuBtn.textContent = isActive ? "×" : "☰";
-            });
-        }
+
+        menuBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            menuBtn.textContent = navLinks.classList.contains("active") ? "×" : "☰";
+        });
     </script>
 </body>
 </html>

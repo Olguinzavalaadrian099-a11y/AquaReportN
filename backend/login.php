@@ -463,9 +463,27 @@ const menuBtn = document.getElementById('menuBtn');
     const loginForm = document.getElementById('login-form');
     const loaderModal = document.getElementById('loader-modal');
     loginForm.addEventListener('submit', function(event) {
-        if (loaderModal) {
-            loaderModal.style.display = 'flex';
-        }
+        event.preventDefault();   
+        loaderModal.style.display = 'flex'; 
+        const formData = new FormData(loginForm);
+        fetch('procesar_login.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.trim() === "OK") {
+                window.location.href = "dashboard_empresa.php";
+            } else {
+                loaderModal.style.display = 'none';
+                alert(data); 
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            loaderModal.style.display = 'none';
+            alert("Ocurrió un error inesperado.");
+        });
     });
 </script>
 </body>

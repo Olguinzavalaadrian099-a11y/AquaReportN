@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form');
+const form = document.querySelector('form');
     const loader = document.getElementById('loader-modal');
 
     if (form && loader) {
@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(response => response.text())
             .then(data => {
-                const idReporte = data.trim(); 
-                window.location.href = '/frontend/reporte.html?id=' + idReporte; 
+                window.location.href = '/frontend/reporte.html?id=exito'; 
             })
             .catch(error => {
                 loader.style.display = 'none'; 

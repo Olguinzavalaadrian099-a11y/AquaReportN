@@ -362,6 +362,43 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             display: none !important;
         }
 
+                @media (max-width: 600px) {
+            .report-card {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 20px;
+            }
+
+            .map-box {
+                height: 200px;
+                width: 100%;
+            }
+
+            .report-id {
+                font-size: 1.5rem; 
+            }
+
+            .info-data {
+                align-items: center; 
+                text-align: center;
+            }
+
+            .select-estado {
+                width: 100%; 
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            body {
+                padding-top: 150px; 
+            }
+        }
+
     </style>
 </head>
 <body>

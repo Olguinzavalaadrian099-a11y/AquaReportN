@@ -1336,7 +1336,7 @@ ul {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    color: #4d4d4d;
+    color: #071b34;
     background-color: #fff;
     transition: all 0.3s ease-in-out;
 }
@@ -1351,19 +1351,19 @@ ul {
 }
 
 .example-1 .icon-content .link[data-social="spotify"]:hover {
-    color: linear-gradient(45deg, #0066cc, #3399ff);
+    color: #3366cc;
 }
 
 .example-1 .icon-content .link[data-social="pinterest"]:hover {
-    color: linear-gradient(45deg, #0099ff, #66ccff);
+    color: #66ccff;
 }
 
 .example-1 .icon-content .link[data-social="dribbble"]:hover {
-    color: linear-gradient(45deg, #33ccff, #99ccff);
+    color: #99ccff;
 }
 
 .example-1 .icon-content .link[data-social="telegram"]:hover {
-    color: linear-gradient(45deg, #66ffff, #ccffff);
+    color: #00f2fe;
 }
 
 .social-footer-container {

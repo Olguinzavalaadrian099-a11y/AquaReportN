@@ -442,61 +442,69 @@
 <script>
     const menuBtn = document.getElementById('menuBtn');
     const navLinks = document.getElementById('navLinks');
-        window.addEventListener('pageshow', () => { document.body.style.opacity = "1"; });
-        if (menuBtn && navLinks) {
-            menuBtn.addEventListener("click", () => {
-                const isActive = navLinks.classList.toggle("active");
-                menuBtn.classList.toggle("menu-active-rotate", isActive);
-                
-                setTimeout(() => {
-                    menuBtn.textContent = isActive ? "×" : "☰";
-                }, 150);
-            });
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    navLinks.classList.remove("active");
-                    menuBtn.classList.remove("menu-active-rotate");
-                    menuBtn.textContent = "☰";
-                });
-            });
-        }
-        const btnVolver = document.querySelector('.btn-volver-loader');
-        if (btnVolver) {
-            btnVolver.addEventListener('click', function(e) {
-                e.preventDefault();
-                loaderModal.style.display = 'flex';
-                if (loaderMessage) loaderMessage.innerText = "Regresando al inicio...";
-
-                setTimeout(() => {
-                    window.location.href = this.getAttribute('href');
-                }, 2000);
-            });
-        }
-    const loginForm = document.getElementById('login-form');
     const loaderModal = document.getElementById('loader-modal');
-    loginForm.addEventListener('submit', function(event) {
-        event.preventDefault();   
-        loaderModal.style.display = 'flex'; 
-        const formData = new FormData(loginForm);
-        fetch('procesar_login.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            if (data.trim() === "OK") {
-                window.location.href = "dashboard_empresa.php";
-            } else {
-                loaderModal.style.display = 'none';
-                alert(data); 
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            loaderModal.style.display = 'none';
-            alert("Ocurrió un error inesperado.");
+    const loaderMessage = document.getElementById('loader-message');
+
+    window.addEventListener('pageshow', () => { document.body.style.opacity = "1"; });
+
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener("click", () => {
+            const isActive = navLinks.classList.toggle("active");
+            menuBtn.classList.toggle("menu-active-rotate", isActive);
+            setTimeout(() => {
+                menuBtn.textContent = isActive ? "×" : "☰";
+            }, 150);
         });
-    });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove("active");
+                menuBtn.classList.remove("menu-active-rotate");
+                menuBtn.textContent = "☰";
+            });
+        });
+    }
+
+    const btnVolver = document.querySelector('.btn-volver-loader');
+    if (btnVolver) {
+        btnVolver.addEventListener('click', function(e) {
+            e.preventDefault();
+            loaderModal.style.display = 'flex';
+            if (loaderMessage) loaderMessage.innerText = "Regresando al inicio...";
+
+            setTimeout(() => {
+                window.location.href = this.getAttribute('href');
+            }, 2000);
+        });
+    }
+
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();   
+            loaderModal.style.display = 'flex';
+            if (loaderMessage) loaderMessage.innerText = "Iniciando sesión...";
+
+            const formData = new FormData(loginForm);
+            fetch('procesar_login.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data.trim() === "OK") {
+                    window.location.href = "dashboard_empresa.php";
+                } else {
+                    loaderModal.style.display = 'none';
+                    alert(data); 
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                loaderModal.style.display = 'none';
+                alert("Ocurrió un error inesperado.");
+            });
+        });
+    }
 </script>
 </body>
 </html>

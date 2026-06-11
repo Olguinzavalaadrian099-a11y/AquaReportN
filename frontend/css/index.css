@@ -1351,7 +1351,7 @@ ul {
 }
 
 .example-1 .icon-content .link[data-social="spotify"]:hover {
-    color: #3366cc;
+    color: #63A4FF;
 }
 
 .example-1 .icon-content .link[data-social="pinterest"]:hover {
@@ -1370,5 +1370,5 @@ ul {
     display: flex;
     justify-content: center;
     padding: 10px 0;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }

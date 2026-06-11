@@ -1351,7 +1351,7 @@ ul {
     height: 30px;
 }
 
-.example-1 .icon-content .link[data-social="spotify"]:hover {
+.example-1 .icon-content .link[data-social="github"]:hover {
     color: #63A4FF;
 }
 

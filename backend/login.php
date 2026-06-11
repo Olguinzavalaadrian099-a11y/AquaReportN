@@ -395,7 +395,7 @@
             <img src="../frontend/img/logo.png" alt="Logo" class="logo">
             <button class="menu-btn" id="menuBtn">☰</button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="../frontend/index.html">Volver al inicio</a></li>
+                <li><a href="../frontend/index.html" class="btn-volver-loader">Volver al inicio</a></li>
                 <li><a href="mailto:olguinzavalaadrian099@gmail.com">Contactanos</a></li>
             </ul>
         </div>
@@ -440,8 +440,8 @@
         </div>
     </div>
 <script>
-const menuBtn = document.getElementById('menuBtn');
-        const navLinks = document.getElementById('navLinks');
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
         window.addEventListener('pageshow', () => { document.body.style.opacity = "1"; });
         if (menuBtn && navLinks) {
             menuBtn.addEventListener("click", () => {
@@ -458,6 +458,18 @@ const menuBtn = document.getElementById('menuBtn');
                     menuBtn.classList.remove("menu-active-rotate");
                     menuBtn.textContent = "☰";
                 });
+            });
+        }
+        const btnVolver = document.querySelector('.btn-volver-loader');
+        if (btnVolver) {
+            btnVolver.addEventListener('click', function(e) {
+                e.preventDefault();
+                loaderModal.style.display = 'flex';
+                if (loaderMessage) loaderMessage.innerText = "Regresando al inicio...";
+
+                setTimeout(() => {
+                    window.location.href = this.getAttribute('href');
+                }, 2000);
             });
         }
     const loginForm = document.getElementById('login-form');

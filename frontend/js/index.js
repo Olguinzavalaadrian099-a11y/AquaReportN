@@ -44,6 +44,22 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    document.querySelectorAll('.btn-cerrar-volver').forEach(boton => {
+        boton.addEventListener('click', function(e) {
+            e.preventDefault(); 
+            
+            if (loader) {
+                loader.style.display = 'flex';
+                const loaderText = loader.querySelector('.loader-text');
+                if (loaderText) loaderText.innerText = "Regresando al inicio...";
+            }
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000); 
+        });
+    });
+
     const btnCerrarVolver = document.querySelector('button[onclick="cerrarYVolver()"]');
     if (btnCerrarVolver) {
         btnCerrarVolver.addEventListener('click', function(e) {

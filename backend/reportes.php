@@ -385,7 +385,7 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <img src="../frontend/img/logo.png" alt="Logo" class="logo">
             <button class="menu-btn" id="menuBtn">☰</button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="logout.php">Cerrar Sesión</a></li>
+                <li><a href="logout.php" class="btn-logout-loader" >Cerrar Sesión</a></li>
             </ul>
         </div>
     </nav>
@@ -450,6 +450,23 @@ $reportes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 setTimeout(() => location.reload(), 2500); 
             });
         }
+        const btnLogout = document.querySelector('.btn-logout-loader');
+        const loaderModal = document.getElementById('loader-modal');
+        const loaderMessage = document.getElementById('loader-message');
+
+        if (btnLogout) {
+            btnLogout.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                
+                loaderModal.style.display = 'flex';
+                if (loaderMessage) loaderMessage.innerText = "Cerrando sesión...";
+
+                setTimeout(() => {
+                    window.location.href = this.getAttribute('href');
+                }, 2000);
+            });
+        }
+
         const menuBtn = document.getElementById('menuBtn');
         const navLinks = document.getElementById('navLinks');
 
